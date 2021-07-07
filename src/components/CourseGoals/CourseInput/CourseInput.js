@@ -28,10 +28,10 @@ const CourseInput = props => {
 
   return (
     <form onSubmit={formSubmitHandler}>
-      <div className="form-control">
-        {/* below we are using the ternary operator to set the colors of the label and input box based on the condition. */}
-        <label style={{ color: !isValid ? 'red' : 'black' }}>Course Goal</label>
-        <input type="text" onChange={goalInputChangeHandler} style={{ borderColor: !isValid ? 'red' : 'black' }} />
+      {/* below we are using the ternary operator to set the classes of the label and input box based on the condition. */}
+      <div className={`form-control ${!isValid ? 'invalid' : ''}`}>
+        <label>Course Goal</label>
+        <input type="text" onChange={goalInputChangeHandler} />
       </div>
       <Button type="submit">Add Goal</Button>
     </form>
