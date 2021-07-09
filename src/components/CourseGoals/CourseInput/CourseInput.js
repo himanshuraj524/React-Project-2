@@ -2,6 +2,39 @@ import React, { useState } from 'react';
 
 import Button from '../../UI/Button/Button';
 import './CourseInput.css';
+// import styled component.
+import styled from 'styled-components';
+
+// creating one more component by using styled component.
+const FormControl = styled.div`
+
+  margin: 0.5rem 0;
+
+& label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+  // below we are using props to set the styling dynamically.
+  color: ${ props => (props.invalid ? 'red' : 'black')};
+}
+
+& input {
+  display: block;
+  width: 100%;
+  // below we are using props to set the styling dynamically.
+  border: 1px solid ${ props => (props.invalid ? 'red' : '#ccc' )};
+  background: ${ props => (props.invalid ? 'rgb(253, 208, 208)' : 'transparent')};
+  font: inherit;
+  line-height: 1.5rem;
+  padding: 0 0.25rem;
+}
+
+& input:focus {
+  outline: none;
+  background: #fad0ec;
+  border-color: #8b005d;
+}
+`;
 
 const CourseInput = props => {
   const [enteredValue, setEnteredValue] = useState('');
@@ -29,10 +62,13 @@ const CourseInput = props => {
   return (
     <form onSubmit={formSubmitHandler}>
       {/* below we are using the ternary operator to set the classes of the label and input box based on the condition. */}
-      <div className={`form-control ${!isValid ? 'invalid' : ''}`}>
+      {/* This is the first way to ad classes dynamically */}
+      {/* <FormControl className={!isValid && 'invalid'}> */}
+      {/* below we are using props to add the style into the formcontrol component dynamically. */}
+      <FormControl invalid={!isValid}>
         <label>Course Goal</label>
         <input type="text" onChange={goalInputChangeHandler} />
-      </div>
+        </FormControl>
       <Button type="submit">Add Goal</Button>
     </form>
   );
